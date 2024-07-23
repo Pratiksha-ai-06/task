@@ -1,0 +1,139 @@
+
+mysql> use pratiksha;
+Database changed
+mysql> show tables;
++---------------------+
+| Tables_in_pratiksha |
++---------------------+
+| book                |
+| doctor              |
+| employee            |
+| employee1           |
+| patient             |
++---------------------+
+5 rows in set (0.18 sec)
+
+mysql> select * from employee1;
++-----+-----------+-----------------+---------+-----------------+-------------------+--------+----------+
+| eno | ename     | designation     | salary  | date_of_joining | email             | city   | phone_no |
++-----+-----------+-----------------+---------+-----------------+-------------------+--------+----------+
+|   1 | mr.advit  | sr. assistant   |   56700 | 15/06/2019      | mradvit@gmail.com | mumbai |     NULL |
+|   2 | mr.Kunal  | HR              | 54862.5 | 20/05/2003      | NULL              | pune   |     NULL |
+|   3 | mr.suraj  | Senoir devloper |   42000 | 22/05/2002      | NULL              | NULL   |     NULL |
+|   4 | mr.raghav | manager         |  441000 | 01/03/2003      | NULL              | NULL   |     NULL |
++-----+-----------+-----------------+---------+-----------------+-------------------+--------+----------+
+4 rows in set (0.08 sec)
+
+mysql> select ename , city from employee1 where salary>=10000 && designation='manager';
++-----------+------+
+| ename     | city |
++-----------+------+
+| mr.raghav | NULL |
++-----------+------+
+1 row in set, 1 warning (0.02 sec)
+
+mysql> select ename from employee1 where city='mumbai' || city='pune';
++----------+
+| ename    |
++----------+
+| mr.advit |
+| mr.Kunal |
++----------+
+2 rows in set, 1 warning (0.00 sec)
+
+mysql> select ename from employee1 where city='mumbai' or city='pune';
++----------+
+| ename    |
++----------+
+| mr.advit |
+| mr.Kunal |
++----------+
+2 rows in set (0.00 sec)
+
+mysql> select ename , city ,email from employee1 where salary>=50000 & designation='manager'|| designation ='HR';
++----------+------+-------+
+| ename    | city | email |
++----------+------+-------+
+| mr.Kunal | pune | NULL  |
++----------+------+-------+
+1 row in set, 6 warnings (0.02 sec)
+
+mysql> select ename , city ,email from employee1 where salary>=50000 & (designation='manager'|| designation ='HR');
++-----------+--------+-------------------+
+| ename     | city   | email             |
++-----------+--------+-------------------+
+| mr.advit  | mumbai | mradvit@gmail.com |
+| mr.Kunal  | pune   | NULL              |
+| mr.suraj  | NULL   | NULL              |
+| mr.raghav | NULL   | NULL              |
++-----------+--------+-------------------+
+4 rows in set, 1 warning (0.00 sec)
+
+mysql> update employee1 set salary=salary+(salary*0.05) where salary>=50000 &&  city='mumbai';
+Query OK, 1 row affected, 1 warning (17.56 sec)
+Rows matched: 1  Changed: 1  Warnings: 1
+
+mysql> select * from employee1
+    -> select * from employee1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select * from employee1' at line 2
+mysql> select * from employee1;
++-----+-----------+-----------------+---------+-----------------+-------------------+--------+----------+
+| eno | ename     | designation     | salary  | date_of_joining | email             | city   | phone_no |
++-----+-----------+-----------------+---------+-----------------+-------------------+--------+----------+
+|   1 | mr.advit  | sr. assistant   |   59535 | 15/06/2019      | mradvit@gmail.com | mumbai |     NULL |
+|   2 | mr.Kunal  | HR              | 54862.5 | 20/05/2003      | NULL              | pune   |     NULL |
+|   3 | mr.suraj  | Senoir devloper |   42000 | 22/05/2002      | NULL              | NULL   |     NULL |
+|   4 | mr.raghav | manager         |  441000 | 01/03/2003      | NULL              | NULL   |     NULL |
++-----+-----------+-----------------+---------+-----------------+-------------------+--------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select ename,city from employee1 where salary between 10000 && 50000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '&& 50000' at line 1
+mysql> select ename,city from employee1 where salary between 10000 and 50000;
++----------+------+
+| ename    | city |
++----------+------+
+| mr.suraj | NULL |
++----------+------+
+1 row in set (0.00 sec)
+
+mysql> select ename from employee1 where eno between 1 and 5 || ename='mr.advit';
++-----------+
+| ename     |
++-----------+
+| mr.advit  |
+| mr.Kunal  |
+| mr.suraj  |
+| mr.raghav |
++-----------+
+4 rows in set, 1 warning (0.01 sec)
+
+mysql> select ename from employee1 where eno between 1 and 5 || (ename='mr.advit');
++-----------+
+| ename     |
++-----------+
+| mr.advit  |
+| mr.Kunal  |
+| mr.suraj  |
+| mr.raghav |
++-----------+
+4 rows in set, 1 warning (0.00 sec)
+
+mysql> update employee set city='pune' where salary between 50000 and 100000;
+ERROR 1054 (42S22): Unknown column 'city' in 'field list'
+mysql> update employee1 set city='pune' where salary between 50000 and 100000;
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 2  Changed: 1  Warnings: 0
+
+mysql> select * from employee1;
++-----+-----------+-----------------+---------+-----------------+-------------------+------+----------+
+| eno | ename     | designation     | salary  | date_of_joining | email             | city | phone_no |
++-----+-----------+-----------------+---------+-----------------+-------------------+------+----------+
+|   1 | mr.advit  | sr. assistant   |   59535 | 15/06/2019      | mradvit@gmail.com | pune |     NULL |
+|   2 | mr.Kunal  | HR              | 54862.5 | 20/05/2003      | NULL              | pune |     NULL |
+|   3 | mr.suraj  | Senoir devloper |   42000 | 22/05/2002      | NULL              | NULL |     NULL |
+|   4 | mr.raghav | manager         |  441000 | 01/03/2003      | NULL              | NULL |     NULL |
++-----+-----------+-----------------+---------+-----------------+-------------------+------+----------+
+4 rows in set (0.00 sec)
+
+mysql>

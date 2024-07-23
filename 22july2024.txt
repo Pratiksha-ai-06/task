@@ -1,0 +1,223 @@
+mysql> create table employee1(eno int primary key,ename varchar(20),designation varchar(20) ,salary float , date_of_joining varchar(20));
+Query OK, 0 rows affected (0.52 sec)
+
+mysql> insert into employee2 values (1,'mr.advit','assistant',54000,'23/03/2002');
+ERROR 1146 (42S02): Table 'pratiksha.employee2' doesn't exist
+mysql> insert into employee1 values (1,'mr.advit','assistant',54000,'23/03/2002');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into employee1 values (2,'mr.Kunal','HR',55000,'20/05/2003');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into employee1 values (3,'mr.suraj','Senoir devloper',40000,'22/05/2002');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into employee1 values (4,'mr.raghav','manager',420000,'01/03/2003');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> alter table employee2 add column email varchar(20);
+ERROR 1146 (42S02): Table 'pratiksha.employee2' doesn't exist
+mysql> alter table employee1 add column email varchar(20);
+Query OK, 0 rows affected (0.23 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee1;
++-----+-----------+-----------------+--------+-----------------+-------+
+| eno | ename     | designation     | salary | date_of_joining | email |
++-----+-----------+-----------------+--------+-----------------+-------+
+|   1 | mr.advit  | assistant       |  54000 | 23/03/2002      | NULL  |
+|   2 | mr.Kunal  | HR              |  55000 | 20/05/2003      | NULL  |
+|   3 | mr.suraj  | Senoir devloper |  40000 | 22/05/2002      | NULL  |
+|   4 | mr.raghav | manager         | 420000 | 01/03/2003      | NULL  |
++-----+-----------+-----------------+--------+-----------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> update employee1 set email='mradvit@gmail.com' where eno=1;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee1;
++-----+-----------+-----------------+--------+-----------------+-------------------+
+| eno | ename     | designation     | salary | date_of_joining | email             |
++-----+-----------+-----------------+--------+-----------------+-------------------+
+|   1 | mr.advit  | assistant       |  54000 | 23/03/2002      | mradvit@gmail.com |
+|   2 | mr.Kunal  | HR              |  55000 | 20/05/2003      | NULL              |
+|   3 | mr.suraj  | Senoir devloper |  40000 | 22/05/2002      | NULL              |
+|   4 | mr.raghav | manager         | 420000 | 01/03/2003      | NULL              |
++-----+-----------+-----------------+--------+-----------------+-------------------+
+4 rows in set (0.00 sec)
+
+mysql> update employee1 set salary=salary+(salary*0.05);
+Query OK, 4 rows affected (0.08 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+mysql> select * from employee1;
++-----+-----------+-----------------+--------+-----------------+-------------------+
+| eno | ename     | designation     | salary | date_of_joining | email             |
++-----+-----------+-----------------+--------+-----------------+-------------------+
+|   1 | mr.advit  | assistant       |  56700 | 23/03/2002      | mradvit@gmail.com |
+|   2 | mr.Kunal  | HR              |  57750 | 20/05/2003      | NULL              |
+|   3 | mr.suraj  | Senoir devloper |  42000 | 22/05/2002      | NULL              |
+|   4 | mr.raghav | manager         | 441000 | 01/03/2003      | NULL              |
++-----+-----------+-----------------+--------+-----------------+-------------------+
+4 rows in set (0.00 sec)
+
+mysql> update employee1 set designation='sr manager' where ename='mr raghav';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from employee1;
++-----+-----------+-----------------+--------+-----------------+-------------------+
+| eno | ename     | designation     | salary | date_of_joining | email             |
++-----+-----------+-----------------+--------+-----------------+-------------------+
+|   1 | mr.advit  | assistant       |  56700 | 23/03/2002      | mradvit@gmail.com |
+|   2 | mr.Kunal  | HR              |  57750 | 20/05/2003      | NULL              |
+|   3 | mr.suraj  | Senoir devloper |  42000 | 22/05/2002      | NULL              |
+|   4 | mr.raghav | manager         | 441000 | 01/03/2003      | NULL              |
++-----+-----------+-----------------+--------+-----------------+-------------------+
+4 rows in set (0.00 sec)
+
+mysql> update employee1 set designation='sr.manager' where ename='mr raghav';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from employee1;
++-----+-----------+-----------------+--------+-----------------+-------------------+
+| eno | ename     | designation     | salary | date_of_joining | email             |
++-----+-----------+-----------------+--------+-----------------+-------------------+
+|   1 | mr.advit  | assistant       |  56700 | 23/03/2002      | mradvit@gmail.com |
+|   2 | mr.Kunal  | HR              |  57750 | 20/05/2003      | NULL              |
+|   3 | mr.suraj  | Senoir devloper |  42000 | 22/05/2002      | NULL              |
+|   4 | mr.raghav | manager         | 441000 | 01/03/2003      | NULL              |
++-----+-----------+-----------------+--------+-----------------+-------------------+
+4 rows in set (0.00 sec)
+
+mysql> update employee1 set designation = 'sr. assistant' where designation ='assistant';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee1;
++-----+-----------+-----------------+--------+-----------------+-------------------+
+| eno | ename     | designation     | salary | date_of_joining | email             |
++-----+-----------+-----------------+--------+-----------------+-------------------+
+|   1 | mr.advit  | sr. assistant   |  56700 | 23/03/2002      | mradvit@gmail.com |
+|   2 | mr.Kunal  | HR              |  57750 | 20/05/2003      | NULL              |
+|   3 | mr.suraj  | Senoir devloper |  42000 | 22/05/2002      | NULL              |
+|   4 | mr.raghav | manager         | 441000 | 01/03/2003      | NULL              |
++-----+-----------+-----------------+--------+-----------------+-------------------+
+4 rows in set (0.00 sec)
+
+mysql> alter table employee1 add (city varchar(20));
+Query OK, 0 rows affected (0.55 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee1;
++-----+-----------+-----------------+--------+-----------------+-------------------+------+
+| eno | ename     | designation     | salary | date_of_joining | email             | city |
++-----+-----------+-----------------+--------+-----------------+-------------------+------+
+|   1 | mr.advit  | sr. assistant   |  56700 | 23/03/2002      | mradvit@gmail.com | NULL |
+|   2 | mr.Kunal  | HR              |  57750 | 20/05/2003      | NULL              | NULL |
+|   3 | mr.suraj  | Senoir devloper |  42000 | 22/05/2002      | NULL              | NULL |
+|   4 | mr.raghav | manager         | 441000 | 01/03/2003      | NULL              | NULL |
++-----+-----------+-----------------+--------+-----------------+-------------------+------+
+4 rows in set (0.00 sec)
+
+mysql> update employee1 set city='mumbai' where ename='mr advit';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from employee1;
++-----+-----------+-----------------+--------+-----------------+-------------------+------+
+| eno | ename     | designation     | salary | date_of_joining | email             | city |
++-----+-----------+-----------------+--------+-----------------+-------------------+------+
+|   1 | mr.advit  | sr. assistant   |  56700 | 23/03/2002      | mradvit@gmail.com | NULL |
+|   2 | mr.Kunal  | HR              |  57750 | 20/05/2003      | NULL              | NULL |
+|   3 | mr.suraj  | Senoir devloper |  42000 | 22/05/2002      | NULL              | NULL |
+|   4 | mr.raghav | manager         | 441000 | 01/03/2003      | NULL              | NULL |
++-----+-----------+-----------------+--------+-----------------+-------------------+------+
+4 rows in set (0.00 sec)
+
+mysql> update employee1 set city='mumbai' where ename='mr advit';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from employee1;
++-----+-----------+-----------------+--------+-----------------+-------------------+------+
+| eno | ename     | designation     | salary | date_of_joining | email             | city |
++-----+-----------+-----------------+--------+-----------------+-------------------+------+
+|   1 | mr.advit  | sr. assistant   |  56700 | 23/03/2002      | mradvit@gmail.com | NULL |
+|   2 | mr.Kunal  | HR              |  57750 | 20/05/2003      | NULL              | NULL |
+|   3 | mr.suraj  | Senoir devloper |  42000 | 22/05/2002      | NULL              | NULL |
+|   4 | mr.raghav | manager         | 441000 | 01/03/2003      | NULL              | NULL |
++-----+-----------+-----------------+--------+-----------------+-------------------+------+
+4 rows in set (0.00 sec)
+
+mysql> update employee1 set city='mumbai' where ename='mr.advit';
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee1;
++-----+-----------+-----------------+--------+-----------------+-------------------+--------+
+| eno | ename     | designation     | salary | date_of_joining | email             | city   |
++-----+-----------+-----------------+--------+-----------------+-------------------+--------+
+|   1 | mr.advit  | sr. assistant   |  56700 | 23/03/2002      | mradvit@gmail.com | mumbai |
+|   2 | mr.Kunal  | HR              |  57750 | 20/05/2003      | NULL              | NULL   |
+|   3 | mr.suraj  | Senoir devloper |  42000 | 22/05/2002      | NULL              | NULL   |
+|   4 | mr.raghav | manager         | 441000 | 01/03/2003      | NULL              | NULL   |
++-----+-----------+-----------------+--------+-----------------+-------------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> update employee1 set city='pune' where ename='mr.Kunal';
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee1 set salary=salary-(salary*0.05) where designation = HR && city='pune';
+ERROR 1054 (42S22): Unknown column 'HR' in 'where clause'
+mysql> update employee1 set salary=salary-(salary*0.05) where designation = 'HR' && city='pune';
+Query OK, 1 row affected, 1 warning (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 1
+
+mysql> select * from employee1;
++-----+-----------+-----------------+---------+-----------------+-------------------+--------+
+| eno | ename     | designation     | salary  | date_of_joining | email             | city   |
++-----+-----------+-----------------+---------+-----------------+-------------------+--------+
+|   1 | mr.advit  | sr. assistant   |   56700 | 23/03/2002      | mradvit@gmail.com | mumbai |
+|   2 | mr.Kunal  | HR              | 54862.5 | 20/05/2003      | NULL              | pune   |
+|   3 | mr.suraj  | Senoir devloper |   42000 | 22/05/2002      | NULL              | NULL   |
+|   4 | mr.raghav | manager         |  441000 | 01/03/2003      | NULL              | NULL   |
++-----+-----------+-----------------+---------+-----------------+-------------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> alter employee1 add(phone_no int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'employee1 add(phone_no int)' at line 1
+mysql> alter table employee1 add(phone_no int);
+Query OK, 0 rows affected (0.23 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee1;
++-----+-----------+-----------------+---------+-----------------+-------------------+--------+----------+
+| eno | ename     | designation     | salary  | date_of_joining | email             | city   | phone_no |
++-----+-----------+-----------------+---------+-----------------+-------------------+--------+----------+
+|   1 | mr.advit  | sr. assistant   |   56700 | 23/03/2002      | mradvit@gmail.com | mumbai |     NULL |
+|   2 | mr.Kunal  | HR              | 54862.5 | 20/05/2003      | NULL              | pune   |     NULL |
+|   3 | mr.suraj  | Senoir devloper |   42000 | 22/05/2002      | NULL              | NULL   |     NULL |
+|   4 | mr.raghav | manager         |  441000 | 01/03/2003      | NULL              | NULL   |     NULL |
++-----+-----------+-----------------+---------+-----------------+-------------------+--------+----------+
+4 rows in set (0.00 sec)
+
+mysql> update employee1 set date_of_joining='15/06/2019' where ename='mr.advit' && city='mumbai';
+Query OK, 1 row affected, 1 warning (0.26 sec)
+Rows matched: 1  Changed: 1  Warnings: 1
+
+mysql> select * from employee1;
++-----+-----------+-----------------+---------+-----------------+-------------------+--------+----------+
+| eno | ename     | designation     | salary  | date_of_joining | email             | city   | phone_no |
++-----+-----------+-----------------+---------+-----------------+-------------------+--------+----------+
+|   1 | mr.advit  | sr. assistant   |   56700 | 15/06/2019      | mradvit@gmail.com | mumbai |     NULL |
+|   2 | mr.Kunal  | HR              | 54862.5 | 20/05/2003      | NULL              | pune   |     NULL |
+|   3 | mr.suraj  | Senoir devloper |   42000 | 22/05/2002      | NULL              | NULL   |     NULL |
+|   4 | mr.raghav | manager         |  441000 | 01/03/2003      | NULL              | NULL   |     NULL |
++-----+-----------+-----------------+---------+-----------------+-------------------+--------+----------+
+4 rows in set (0.00 sec)
+
+mysql>
